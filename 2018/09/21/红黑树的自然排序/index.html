@@ -5,18 +5,18 @@
   
   <title>采用红黑树的自然排序 | 秋生</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="采用红黑树的自然排序： 排序啊啊啊">
+  <meta name="description" content="智障标题">
 <meta name="keywords" content="自然排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="采用红黑树的自然排序">
 <meta property="og:url" content="https://zhipeng0908.gitee.io/2018/09/21/红黑树的自然排序/index.html">
 <meta property="og:site_name" content="秋生">
-<meta property="og:description" content="采用红黑树的自然排序： 排序啊啊啊">
+<meta property="og:description" content="智障标题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-29T10:55:51.438Z">
+<meta property="og:updated_time" content="2019-01-30T10:36:16.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="采用红黑树的自然排序">
-<meta name="twitter:description" content="采用红黑树的自然排序： 排序啊啊啊">
+<meta name="twitter:description" content="智障标题">
   
     <link rel="alternative" href="/atom.xml" title="秋生" type="application/atom+xml">
   
@@ -148,7 +148,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/HTML-3/" style="font-size: 10px;">HTML 3</a> <a href="/tags/HTML-4/" style="font-size: 10px;">HTML 4</a> <a href="/tags/自然排序/" style="font-size: 10px;">自然排序</a>
+                        <a href="/tags/HTML-3/" style="font-size: 10px;">HTML 3</a> <a href="/tags/HTML-4/" style="font-size: 10px;">HTML 4</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/自然排序/" style="font-size: 10px;">自然排序</a>
                     </div>
                 </section>
                 
@@ -264,7 +264,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong> 采用红黑树的自然排序：</strong> <excerpt in="" index="" |="" 首页摘要=""><br>排序啊啊啊<br><a id="more"></a></excerpt></p>
+        <p><strong>智障标题</strong> <excerpt in="" index="" |="" 首页摘要=""><br><a id="more"></a></excerpt></p>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>概述:TreeSet集合底层才有红黑树算法,会对存储的元素默认使用自然<br>    排序(从小到大),此时必须保证TreeSet集合中的元素对象是相同的数据<br>    类型,负责报错</the></p>
 <h2 id="实现自然排序要求"><a href="#实现自然排序要求" class="headerlink" title="实现自然排序要求"></a>实现自然排序要求</h2><ul>
 <li>TreeSet中的对象必须重写equals和HashCode方法,用于确保添加的对象不会重复</li>
@@ -274,7 +274,10 @@
 <p>Comparable接口:(可比较的)</p>
 <ol>
 <li>覆盖public int comparaTo(Object o)方法,在该方法中编写比较规则</li>
-<li>在该方法中,比较当前对象(this)和参数对象o作比较(严格上说是比较对象中的数据,比如按照对象的年龄进行排序)<br> this &gt; o :返回正整数 1<br> this &lt; o :返回负整数 -1<br> this == o :返回0 (此时认为两个对象是同一个对象)</li>
+<li>在该方法中,比较当前对象(this)和参数对象o作比较(严格上说是比较对象中的数据,比如按照对象的年龄进行排序)<pre><code>this &gt; o :返回正整数 1
+this &lt; o :返回负整数 -1
+this == o :返回0 (此时认为两个对象是同一个对象)
+</code></pre></li>
 </ol>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><strong>Student类编写</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.EqualsAndHashCode;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"><span class="keyword">import</span> lombok.ToString;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*为了代码的简洁明了</span></span><br><span class="line"><span class="comment">*本人此处采用的是lombok插件进行自动生成get,set,toString,equals,HashCode方法</span></span><br><span class="line"><span class="comment">*如果没有lombok插件,使用工具自动生成这些方法是一致的</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Getter</span><span class="meta">@Setter</span><span class="meta">@ToString</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Comparable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    Student(Integer  age,String name)&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        Student student = (Student) o;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.getAge()&gt;student.getAge())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.getAge()&lt;student.getAge())&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>测试类</strong></p>
@@ -341,7 +344,7 @@
         </p>
         <p><span>文章作者:</span><a href="/" title="访问 宋志鹏 的个人博客">宋志鹏</a></p>
         <p><span>发布时间:</span>2018年09月21日 - 14时39分</p>
-        <p><span>最后更新:</span>2019年01月29日 - 18时55分</p>
+        <p><span>最后更新:</span>2019年01月30日 - 18时36分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/09/21/红黑树的自然排序/" title="采用红黑树的自然排序">https://zhipeng0908.gitee.io/2018/09/21/红黑树的自然排序/</a>
             <span class="copy-path" data-clipboard-text="原文: https://zhipeng0908.gitee.io/2018/09/21/红黑树的自然排序/　　作者: 宋志鹏" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -357,11 +360,11 @@
 
 <nav id="article-nav">
   
-    <a href="/2099/09/30/message/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/09/21/02SpringDataRedis/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          关于部分图片无法加载以及css样式异常
+          SpringDataRedis
         
       </div>
     </a>
@@ -425,7 +428,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2099/09/30/message/" title="上一篇: 关于部分图片无法加载以及css样式异常">
+            <a href="/2018/09/21/02SpringDataRedis/" title="上一篇: SpringDataRedis">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -434,7 +437,7 @@
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2099/09/30/message/">关于部分图片无法加载以及css样式异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/红黑树的自然排序/">采用红黑树的自然排序</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2099/09/30/message/">关于部分图片无法加载以及css样式异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/02SpringDataRedis/">SpringDataRedis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/红黑树的自然排序/">采用红黑树的自然排序</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
@@ -474,7 +477,7 @@
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style="display:none">
-                        <span id="site-visit">海贼到访数: 
+                        <span id="site-visit">访客数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
